@@ -11,6 +11,8 @@ import (
 	plugin "github.com/SemRels/hook-gitplugin/internal/plugin"
 )
 
+const pluginSchemaVersion = 1
+
 type gitPlugin interface {
 	Validate() error
 	CommitFiles(context.Context, string, string) error
@@ -24,6 +26,7 @@ var (
 )
 
 func run(ctx context.Context, getenv func(string) string, stderr io.Writer) int {
+	fmt.Fprintf(stderr, "plugin_schema_version=%d\n", pluginSchemaVersion)
 	tagName := firstNonEmpty(getenv("SEMREL_PLUGIN_TAG_NAME"), getenv("SEMREL_TAG_NAME"), getenv("SEMREL_VERSION"), getenv("SEMREL_NEXT_VERSION"))
 	versionSource := firstNonEmpty(getenv("SEMREL_VERSION"), getenv("SEMREL_TAG_NAME"), getenv("SEMREL_NEXT_VERSION"), tagName)
 	if tagName == "" || versionSource == "" {
