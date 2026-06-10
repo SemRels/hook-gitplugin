@@ -61,7 +61,7 @@ func TestRunSuccess(t *testing.T) {
 		"SEMREL_PLUGIN_SIGN_TAG":      "true",
 		"SEMREL_PLUGIN_SIGNED_OFF_BY": "true",
 	}), &stderr)
-	if code != 0 || stderr.Len() != 0 {
+	if code != 0 || stderr.String() != "plugin_schema_version=1\n" {
 		t.Fatalf("unexpected result: code=%d stderr=%q", code, stderr.String())
 	}
 	if got := len(fake.calls); got != 3 {
