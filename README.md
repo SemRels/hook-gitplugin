@@ -1,6 +1,6 @@
 # hook-gitplugin
 
-[![Latest Release](https://img.shields.io/github/v/release/SemRels/hook-gitplugin?label=version\&color=blue)](https://github.com/SemRels/hook-gitplugin/releases/latest)
+[![Latest Release](https://img.shields.io/github/v/release/SemRels/hook-gitplugin?label=version&color=blue)](https://github.com/SemRels/hook-gitplugin/releases/latest)
 
 Pushes release tags and related git updates to another repository.
 
