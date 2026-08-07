@@ -30,7 +30,7 @@ func run(ctx context.Context, getenv func(string) string, stderr io.Writer) int 
 	tagName := firstNonEmpty(getenv("SEMREL_PLUGIN_TAG_NAME"), getenv("SEMREL_TAG_NAME"), getenv("SEMREL_VERSION"), getenv("SEMREL_NEXT_VERSION"))
 	versionSource := firstNonEmpty(getenv("SEMREL_VERSION"), getenv("SEMREL_TAG_NAME"), getenv("SEMREL_NEXT_VERSION"), tagName)
 	if tagName == "" || versionSource == "" {
-		fmt.Fprintln(stderr, "hook-gitplugin: SEMREL_PLUGIN_TAG_NAME, SEMREL_TAG_NAME, SEMREL_VERSION, or SEMREL_NEXT_VERSION is required")
+		_, _ = fmt.Fprintln(stderr, "hook-gitplugin: SEMREL_PLUGIN_TAG_NAME, SEMREL_TAG_NAME, SEMREL_VERSION, or SEMREL_NEXT_VERSION is required")
 		return 1
 	}
 
@@ -51,27 +51,27 @@ func run(ctx context.Context, getenv func(string) string, stderr io.Writer) int 
 
 	p := newPlugin(cfg)
 	if err := p.Validate(); err != nil {
-		fmt.Fprintln(stderr, "hook-gitplugin:", err)
+		_, _ = fmt.Fprintln(stderr, "hook-gitplugin:", err)
 		return 1
 	}
 
 	dir, err := getwd()
 	if err != nil {
-		fmt.Fprintln(stderr, "hook-gitplugin:", err)
+		_, _ = fmt.Fprintln(stderr, "hook-gitplugin:", err)
 		return 1
 	}
 
 	version := normalizeVersion(versionSource, getenv("SEMREL_TAG_PREFIX"))
 	if err := p.CommitFiles(ctx, dir, version); err != nil {
-		fmt.Fprintln(stderr, "hook-gitplugin:", err)
+		_, _ = fmt.Fprintln(stderr, "hook-gitplugin:", err)
 		return 1
 	}
 	if err := p.CreateTag(ctx, dir, version); err != nil {
-		fmt.Fprintln(stderr, "hook-gitplugin:", err)
+		_, _ = fmt.Fprintln(stderr, "hook-gitplugin:", err)
 		return 1
 	}
 	if err := p.Push(ctx, dir, version); err != nil {
-		fmt.Fprintln(stderr, "hook-gitplugin:", err)
+		_, _ = fmt.Fprintln(stderr, "hook-gitplugin:", err)
 		return 1
 	}
 	return 0
