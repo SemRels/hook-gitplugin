@@ -1,6 +1,10 @@
 # hook-gitplugin
 
 [![Latest Release](https://img.shields.io/github/v/release/SemRels/hook-gitplugin?label=version&color=blue)](https://github.com/SemRels/hook-gitplugin/releases/latest)
+[![CI](https://github.com/SemRels/hook-gitplugin/actions/workflows/ci.yml/badge.svg)](https://github.com/SemRels/hook-gitplugin/actions/workflows/ci.yml)
+[![License](https://img.shields.io/github/license/SemRels/hook-gitplugin)](LICENSE)
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/SemRels/hook-gitplugin/badge)](https://scorecard.dev/viewer/?uri=github.com/SemRels/hook-gitplugin)
+[![REUSE status](https://api.reuse.software/badge/github.com/SemRels/hook-gitplugin)](https://api.reuse.software/info/github.com/SemRels/hook-gitplugin)
 
 Pushes release tags and related git updates to another repository.
 
