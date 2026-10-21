@@ -1,6 +1,6 @@
 # Code of Conduct
 
-hook-gitplugin is committed to providing a welcoming and harassment-free community.
+`hook-gitplugin` is committed to providing a welcoming and harassment-free community.
 
 ## Our Pledge
 
