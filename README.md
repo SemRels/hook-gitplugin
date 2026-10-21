@@ -39,21 +39,23 @@ cosign verify ghcr.io/semrels/hook-gitplugin:latest \
 
 ```yaml
 plugins:
-  - name: hook-gitplugin
-    path: ~/.semrel/plugins/semrel-plugin-hook-gitplugin
-    env:
-      SEMREL_PLUGIN_REPO: "https://github.com/acme/releases-mirror.git"
-      SEMREL_PLUGIN_BRANCH: "main"
-      SEMREL_PLUGIN_TOKEN: "${GIT_TOKEN}"
+  - uses: "@semrel/hook-gitplugin"
+    phase: release
+    args:
+      repo: "https://github.com/acme/releases-mirror.git"
+      branch: "main"
+      token: "${GIT_TOKEN}"
 ```
 
-## `SEMREL_PLUGIN_*` variables
+## Options
 
-| Name | Required | Description | Default |
-| --- | --- | --- | --- |
-| `SEMREL_PLUGIN_REPO` | Required | Git repository URL that receives the tag or release updates. | None |
-| `SEMREL_PLUGIN_BRANCH` | Optional | Branch to update in the target repository. | main |
-| `SEMREL_PLUGIN_TOKEN` | Optional | Token used when authenticating to the target repository. | None |
+Every option can be set as an entry under `args` in `.semrel.yaml`. semrel passes each entry to the plugin as the environment variable shown in the table, so you can also set that variable directly (for example in your CI environment) instead of using `args`.
+
+| Argument | Environment variable | Required | Description | Default |
+| --- | --- | --- | --- | --- |
+| `repo` | `SEMREL_PLUGIN_REPO` | Required | Git repository URL that receives the tag or release updates. | None |
+| `branch` | `SEMREL_PLUGIN_BRANCH` | Optional | Branch to update in the target repository. | main |
+| `token` | `SEMREL_PLUGIN_TOKEN` | Optional | Token used when authenticating to the target repository. | None |
 
 ## `SEMREL_*` release context used
 
